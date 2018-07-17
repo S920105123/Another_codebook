@@ -1,0 +1,9 @@
+SA/LCP
+FFT
+min representation
+SCC
+heavy light decomp
+centroid decomp
+AC
+Gaussian
+half plane intersection
