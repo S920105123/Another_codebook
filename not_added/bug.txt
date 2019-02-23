@@ -1,0 +1,6 @@
+TLE because #TC is large, init time dominate?
+Initialize?
+0-based or 1-based? (segment tree? BIT? flow?)
+MAXN is confused with other constant? e.g.: MEM_SIZE, MAXV in flow
+MAXN is too small?
+Divided by 0?
