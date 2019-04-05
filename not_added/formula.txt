@@ -8,6 +8,7 @@
 費馬小定理: a * a^(p-2) = 1 (mod p), a,p互質
 次方同餘定理: a^k mod p = (a mod p)^(k mod p-1) p是質數
 Modulo inverse: inv[i] ≡ - floor(p / i) × inv[p % i] (mod p)
+中國剩餘定理: x=Ai(mod mi), mi互質, Mi=所有m的乘積/mi, Ti=Mi^-1(mod mi), 則x=sigma(Mi*Ti*Ai)
 枚舉擴展歐幾里得之解:
 	若x0,y0為a*x+b*y = k之一組解，則
 	x=x0+t*b/gcd(a,b), y=y0+t*a/gcd(a,b)亦為解，t為整數
