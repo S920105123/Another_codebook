@@ -1,4 +1,4 @@
-尤拉公式: V-E+F = C+1
+若多項式f(x)有有理根P/Q(PQ互質), 則P必為常數項a0之因數, Q必為領導係數an之因數
 滿足ceil(n/i)=k之最大i:
 	INF, if k=1
 	n/(k-1)-1, else if k-1 整除 n
@@ -8,10 +8,11 @@
 費馬小定理: a * a^(p-2) = 1 (mod p), a,p互質
 次方同餘定理: a^k mod p = (a mod p)^(k mod p-1) p是質數
 Modulo inverse: inv[i] ≡ - floor(p / i) × inv[p % i] (mod p)
-中國剩餘定理: x=Ai(mod mi), mi互質, Mi=所有m的乘積/mi, Ti=Mi^-1(mod mi), 則x=sigma(Mi*Ti*Ai)
+中國剩餘定理: x=Ai(mod mi), mi互質, Mi=所有m的乘積/mi, Ti=Mi^-1(mod mi), 則x=sigma(Mi*Ti*Ai)(mod M)
 枚舉擴展歐幾里得之解:
 	若x0,y0為a*x+b*y = k之一組解，則
 	x=x0+t*b/gcd(a,b), y=y0+t*a/gcd(a,b)亦為解，t為整數
+尤拉公式: V-E+F = C+1
 最大獨立集: 點的集合，其內點不相鄰
 最小點覆蓋: 點的集合，所有邊都被覆蓋
 最大匹配: 邊的集合，其內邊不共用點
