@@ -1,5 +1,5 @@
 struct AC {
-	int N; // link: suffix ling, next: DFA link
+	int N; // link: suffix link, next: DFA link
 	int pa[MAXN], dep[MAXN], link[MAXN], next[MAXN][ALPHA];
 	int trie[MAXN][ALPHA], tag[MAXN], nocc[MAXN];
 	// next and link always exist, others exist iff values != -1.
@@ -16,6 +16,7 @@ struct AC {
 		return N++;
 	}
 	void init() {
+		// Init -> add all strings -> build
 		N = 0;
 		new_node(0);
 	}

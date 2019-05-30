@@ -5,32 +5,14 @@ const double PI=acos(-1);
 struct Point {
 	// Also a vector
 	double x,y;
-	Point operator+(const Point &p) const {
-		return {x+p.x,y+p.y};
-	}
-	Point operator-(const Point &p) const {
-		return {x-p.x,y-p.y};
-	}
-	Point operator*(double mul) const {
-		return {x*mul,y*mul};
-	}
-	Point operator/(double mul) const {
-		return {x/mul,y/mul};
-	}
-	bool operator==(const Point &p) const {
-		return x==p.x&&y==p.y;
-	}
 	double cross(const Point &v) const {
 		return x*v.y-y*v.x;
 	}
 	double dot(const Point &v) const {
 		return x*v.x+y*v.y;
 	}
-	Point normal() { // Normal vector
+	Point normal() { // Normal vector to the left
 		return {-y,x};
-	}
-	double len() const { // length
-		return sqrt(x*x+y*y);
 	}
 	double angle(const Point &v) const {
 		// Angle from *this to v in [-pi,pi].
@@ -44,16 +26,12 @@ struct Point {
 };
 
 struct Line {
-	// Also a segment
+	// IMPORTANT, remember to transform between two-point form
+	// and normal form by yourself, some methods may need them.
 	Point p1,p2;
 	double a,b,c; // ax+by+c=0
-	Line(){}
-	Line(const Point &_p1, const Point &_p2) {
-		p1=_p1; p2=_p2;
-		pton();
-	}
+	Line(){} 
     void pton() {
-        // IMPORTANT if you don't use constructor.
         a=p1.y-p2.y;
 		b=p2.x-p1.x;
 		c=-a*p1.x-b*p1.y;
@@ -65,7 +43,7 @@ struct Line {
 		double crs=dir.cross(p-p1);
 		return crs==0?0:crs<0?-1:1;
 	}
-	Point normal() {
+	Point normal() { // normal vector to the left.
 		Point dir=p2-p1;
 		return {-dir.y,dir.x};
 	}
