@@ -1,5 +1,2 @@
-FFT
 centroid decomp
-AC
-Gaussian
 half plane intersection

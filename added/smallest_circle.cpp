@@ -1,46 +1,23 @@
-struct Circle{
-    Point x;
-    double r;
-    bool incircle(const Point &c)const{return (x-c).len()<=r+EPS;}
-    bool stincircle(const Point &c)const{return (x-c).len()<r-EPS;}
-};
-
-Circle TwoPointCircle(const Point &a, const Point &b) {
-    Point m=(a+b)/2;
-    return (Circle){m,(a-m).len()};
+using PT=point<T>; using CPT=const PT;
+PT circumcenter(CPT &a,CPT &b,CPT &c){
+	PT u=b-a, v=c-a;
+	T c1=u.abs2()/2,c2=v.abs2()/2;
+	T d=u.cross(v);
+	return PT(a.x+(v.y*c1-u.y*c2)/d,a.y+(u.x*c2-v.x*c1)/d);
 }
-
-Circle outcircle(Point a, Point b, Point c) {
-    if(TwoPointCircle(a,b).incircle(c)) return TwoPointCircle(a,b);
-    if(TwoPointCircle(b,c).incircle(a)) return TwoPointCircle(b,c);
-    if(TwoPointCircle(c,a).incircle(b)) return TwoPointCircle(c,a);
-    Point ret;
-    double a1=b.x-a.x, b1=b.y-a.y, c1=(a1*a1+b1*b1)/2;
-    double a2=c.x-a.x, b2=c.y-a.y, c2=(a2*a2+b2*b2)/2;
-    double d = a1*b2 - a2*b1;
-    ret.x=a.x+(c1*b2-c2*b1)/d;
-    ret.y=a.y+(a1*c2-a2*c1)/d;
-    return (Circle){ret,(ret-a).len()};
-}
-//rand required
-Circle SmallestCircle(vector<Point> &p){
-    int n=p.size();
-    if(n==0) return {{INF,INF},0};
-    if(n==1) return (Circle){p[0],0.0};
-    if(n==2) return TwoPointCircle(p[0],p[1]);
-    random_shuffle(p.begin(),p.end());
-    Circle c = {p[0],0.0};
-    for(int i=0;i<n;++i){
-        if(c.incircle(p[i])) continue;
-        c=Circle{p[i],0.0};
-        for(int j=0;j<i;++j){
-            if(c.incircle(p[j])) continue;
-            c=TwoPointCircle(p[i],p[j]);
-            for(int k=0;k<j;++k){
-                if(c.incircle(p[k])) continue;
-                c=outcircle(p[i],p[j],p[k]);
-            }
-        }
-    }
-    return c;
+void solve(PT p[],int n,PT &c,T &r2){
+	random_shuffle(p,p+n);
+	c=p[0]; r2=0; // c,r2 = ??,????
+for(int i=1;i<n;i++)if((p[i]-c).abs2()>r2){
+		c=p[i]; r2=0;
+for(int j=0;j<i;j++)if((p[j]-c).abs2()>r2){
+			c.x=(p[i].x+p[j].x)/2;
+			c.y=(p[i].y+p[j].y)/2;
+			r2=(p[j]-c).abs2();
+for(int k=0;k<j;k++)if((p[k]-c).abs2()>r2){
+				c=circumcenter(p[i],p[j],p[k]);
+				r2=(p[i]-c).abs2();
+			}
+		}
+	}
 }
